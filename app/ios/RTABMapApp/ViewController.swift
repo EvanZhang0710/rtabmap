@@ -9,6 +9,10 @@ import GLKit
 import ARKit
 import Zip
 import StoreKit
+import Open3DSupport
+import NumPySupport
+import PythonSupport
+import PythonKit
 
 extension Array {
     func size() -> Int {
@@ -787,6 +791,9 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         fileMenuChildren.append(UIAction(title: "Append Scan", image: UIImage(systemName: "play.fill"), attributes: actionResumeEnabled ? [] : .disabled, state: .off, handler: { _ in
             self.resumeScan()
         }))
+        fileMenuChildren.append(UIAction(title: "Align Scan", image: UIImage(systemName: "play.fill"), attributes: actionResumeEnabled ? [] : .disabled, state: .off, handler: { _ in
+            self.newScan(type: 1)
+        }))
         
         // File menu
         let fileMenu = UIMenu(title: "File", options: .displayInline, children: fileMenuChildren)
@@ -1421,7 +1428,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         startCamera();
     }
     
-    func newScan()
+    func newScan(type: Int = 0)
     {
         print("databases.size() = \(databases.size())")
         if(databases.count >= 5 && !mReviewRequested && self.depthSupported)
@@ -1545,12 +1552,38 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         }
         else
         {
-            self.rtabmap!.openDatabase(databasePath: tmpDatabase.path, databaseInMemory: inMemory, optimize: false, clearDatabase: true)
-
-            if(!(self.mState == State.STATE_CAMERA || self.mState == State.STATE_MAPPING))
+            // Normal Scan
+            if (type == 0)
             {
-                self.setGLCamera(type: 0);
-                self.startCamera();
+                self.rtabmap!.openDatabase(databasePath: tmpDatabase.path, databaseInMemory: inMemory, optimize: false, clearDatabase: true)
+
+                if(!(self.mState == State.STATE_CAMERA || self.mState == State.STATE_MAPPING))
+                {
+                    self.setGLCamera(type: 0);
+                    self.startCamera();
+                }
+            }
+            
+            // User selects "Align Scan"
+            else
+            {
+                // Alert message before scan
+                let alert = UIAlertController(title: "Align Scan", message: "Please make sure the selected points are in the scene!", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default) {
+                    (UIAlertAction) -> Void in
+                    self.resetNoTouchTimer(true)
+                }
+                alert.addAction(ok)
+                
+                // Start scanning a new scene
+                self.rtabmap!.openDatabase(databasePath: tmpDatabase.path, databaseInMemory: inMemory, optimize: false, clearDatabase: true)
+
+                if(!(self.mState == State.STATE_CAMERA || self.mState == State.STATE_MAPPING))
+                {
+                    self.setGLCamera(type: 0);
+                    self.startCamera();
+                }
+                // self.present(alert, animated: true, completion: nil)
             }
         }
     }

@@ -1,16 +1,69 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Zip",
-        "repositoryURL": "https://github.com/marmelroy/Zip.git",
-        "state": {
-          "branch": null,
-          "revision": "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
-          "version": "2.1.1"
-        }
+  "originHash" : "7bac7e222c65e7b6e05040e97d32c7b485a0e7ae14ab8da3444a0aafe3187cdf",
+  "pins" : [
+    {
+      "identity" : "blas-lapack-appstore-workaround",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kewlbear/BLAS-LAPACK-AppStore-Workaround.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "dc78ff05b3c8c1c39d83aab9bdbaef59dc6c87f5"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "lapacke-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kewlbear/LAPACKE-iOS.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6fbd386ff1cbde8ee6cbf83d2d398d21f8e4474d"
+      }
+    },
+    {
+      "identity" : "numpy-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kewlbear/NumPy-iOS.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4d0f25e59ca6b9746ae447d6bb682d12a54cff13"
+      }
+    },
+    {
+      "identity" : "open3d-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/charliegarrison/Open3D-iOS.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "92d514dcbeb4b7955946cbf5f3c15a332727e15b"
+      }
+    },
+    {
+      "identity" : "python-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kewlbear/Python-iOS.git",
+      "state" : {
+        "revision" : "4f3ca2bc0cff1ef2511555eb6114f9eb12e50412",
+        "version" : "0.1.1-b20230423-090254"
+      }
+    },
+    {
+      "identity" : "pythonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "http://github.com/pvieito/PythonKit.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "43647b36cacb99558e57ef98e97ef598f91d1164"
+      }
+    },
+    {
+      "identity" : "zip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/Zip.git",
+      "state" : {
+        "revision" : "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
+        "version" : "2.1.1"
+      }
+    }
+  ],
+  "version" : 3
 }
