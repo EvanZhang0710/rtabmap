@@ -13,6 +13,8 @@ import Open3DSupport
 import NumPySupport
 import PythonSupport
 import PythonKit
+import LinkPython
+import SceneKit
 
 extension Array {
     func size() -> Int {
@@ -182,6 +184,15 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        PythonSupport.initialize()
+        Open3DSupport.sitePackagesURL.insertPythonPath()
+        NumPySupport.sitePackagesURL.insertPythonPath()
+        let o3d = Python.import("open3d")
+        let sys = Python.import("sys")
+        print("Python \(sys.version_info.major).\(sys.version_info.minor)")
+        print("Python Version: \(sys.version)")
+        print(sys.path)
         
         self.toastLabel.isHidden = true
         session.delegate = self
@@ -2293,32 +2304,55 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         self.present(alert, animated: true, completion: nil)
     }
 
-    func openPointSelectionWindow() {
-        let fullScreenViewController = UIViewController()
-        fullScreenViewController.view.backgroundColor = .white
+    @objc func openPointSelectionWindow() {
+        let modelViewController = UIViewController()
+        modelViewController.view.backgroundColor = .white
 
+        let sceneView = SCNView(frame: modelViewController.view.bounds)
+        sceneView.scene = SCNScene()
+        modelViewController.view.addSubview(sceneView)
+        
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("Done", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.addTarget(self, action: #selector(closeFullScreenView), for: .touchUpInside)
-        fullScreenViewController.view.addSubview(doneButton)
-
-        // Center the "Done" button in the full-screen view
-        NSLayoutConstraint.activate([
-                doneButton.centerXAnchor.constraint(equalTo: fullScreenViewController.view.centerXAnchor),
-                doneButton.bottomAnchor.constraint(equalTo: fullScreenViewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-            ])
+        modelViewController.view.addSubview(doneButton)
         
-        fullScreenViewController.modalPresentationStyle = .fullScreen
-        fullScreenViewController.modalTransitionStyle = .crossDissolve
+        NSLayoutConstraint.activate([
+            doneButton.centerXAnchor.constraint(equalTo: modelViewController.view.centerXAnchor),
+            doneButton.bottomAnchor.constraint(equalTo: modelViewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+        
+        doneButton.addTarget(self, action: #selector(closeFullScreenView), for: .touchUpInside)
+        
+        modelViewController.modalPresentationStyle = .fullScreen
+        modelViewController.modalTransitionStyle = .crossDissolve
 
-        self.present(fullScreenViewController, animated: true, completion: nil)
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            let o3d = Python.import("open3d")
+//            let url = Bundle.main.url(forResource: "fragment", withExtension: "ply")!
+//            let pcd = o3d.io.read_point_cloud(url.path)
+//            let np = Python.import("numpy")
+//            let points = np.asarray(pcd.points)
+//            var vertices = [SCNVector3]()
+//            for point in points {
+//                vertices.append(SCNVector3(x: Float(point[0])!, y: Float(point[1])!, z: Float(point[2])!))
+//            }
+//            let geometrySource = SCNGeometrySource(vertices: vertices)
+//            let indices: [Int32] = Array(0..<Int32(vertices.count))
+//            let geometryElement = SCNGeometryElement(indices: indices, primitiveType: .point)
+//            let geometry = SCNGeometry(sources: [geometrySource], elements: [geometryElement])
+//            let node = SCNNode(geometry: geometry)
+//            DispatchQueue.main.async {
+//                    sceneView.scene?.rootNode.addChildNode(node)
+//            }
+//        }
+        self.present(modelViewController, animated: true, completion: nil)
     }
 
-    // Function to close the full-screen view
     @objc func closeFullScreenView() {
         self.dismiss(animated: true, completion: nil)
     }
+
 
     
     //MARK: Actions
