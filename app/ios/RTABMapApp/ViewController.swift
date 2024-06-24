@@ -110,6 +110,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
     @IBOutlet weak var closeVisualizationButton: UIButton!
     @IBOutlet weak var stopCameraButton: UIButton!
     @IBOutlet weak var exportOBJPLYButton: UIButton!
+    @IBOutlet weak var selectPointsButton: UIButton!
     @IBOutlet weak var orthoDistanceSlider: UISlider!{
         didSet{
             orthoDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
@@ -606,6 +607,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
             exportOBJPLYButton.isHidden = true
             orthoDistanceSlider.isHidden = cameraMode != 3
             orthoGridSlider.isHidden = cameraMode != 3
+            selectPointsButton.isHidden = true
             actionNewScanEnabled = true
             actionSaveEnabled = false
             actionResumeEnabled = false
@@ -625,6 +627,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
             exportOBJPLYButton.isHidden = true
             orthoDistanceSlider.isHidden = cameraMode != 3 || !mHudVisible
             orthoGridSlider.isHidden = cameraMode != 3 || !mHudVisible
+            selectPointsButton.isHidden = true
             actionNewScanEnabled = true
             actionSaveEnabled = false
             actionResumeEnabled = false
@@ -646,6 +649,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
             exportOBJPLYButton.isHidden = true
             orthoDistanceSlider.isHidden = cameraMode != 3 || mState != .STATE_VISUALIZING_WHILE_LOADING
             orthoGridSlider.isHidden = cameraMode != 3 || mState != .STATE_VISUALIZING_WHILE_LOADING
+            selectPointsButton.isHidden = true
             actionNewScanEnabled = false
             actionSaveEnabled = false
             actionResumeEnabled = false
@@ -665,6 +669,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
             exportOBJPLYButton.isHidden = !mHudVisible
             orthoDistanceSlider.isHidden = cameraMode != 3 || !mHudVisible
             orthoGridSlider.isHidden = cameraMode != 3 || !mHudVisible
+            selectPointsButton.isHidden = false
             actionNewScanEnabled = true
             actionSaveEnabled = mMapNodes>0
             actionResumeEnabled = mMapNodes>0
@@ -684,6 +689,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
             exportOBJPLYButton.isHidden = true
             orthoDistanceSlider.isHidden = cameraMode != 3 || !mHudVisible
             orthoGridSlider.isHidden = cameraMode != 3 || !mHudVisible
+            selectPointsButton.isHidden = true
             actionNewScanEnabled = true
             actionSaveEnabled = mState != .STATE_WELCOME && mMapNodes>0
             actionResumeEnabled = mState != .STATE_WELCOME && mMapNodes>0
@@ -1574,6 +1580,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
                     self.resetNoTouchTimer(true)
                 }
                 alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
                 
                 // Start scanning a new scene
                 self.rtabmap!.openDatabase(databasePath: tmpDatabase.path, databaseInMemory: inMemory, optimize: false, clearDatabase: true)
@@ -1583,7 +1590,6 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
                     self.setGLCamera(type: 0);
                     self.startCamera();
                 }
-                // self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -2275,8 +2281,31 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    func selectPoints(){
+        // Import open3D
+//        PythonSupport.initialize()
+//        Open3DSupport.sitePackagesURL.insertPythonPath()
+//        NumPySupport.sitePackagesURL.insertPythonPath()
+//        let o3d = Python.import("open3d")
+        
+        // Alert Message
+        let alert = UIAlertController(title: "Align Scan", message: "Please make sure exactly 3 points are selected!", preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "OK", style: .default) {
+                            (UIAlertAction) -> Void in
+                            self.resetNoTouchTimer(true)
+                        }
+                        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+        
+        // Turns the current database into a mesh and displays it via a new window in open3D
+
+    }
 
     //MARK: Actions   
+    @IBAction func selectPointsAction(_ sender: UIButton) {
+        selectPoints()
+    }
     @IBAction func stopAction(_ sender: UIButton) {
         stopMapping(ignoreSaving: false)
     }
