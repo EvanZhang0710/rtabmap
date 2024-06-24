@@ -2282,27 +2282,46 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func selectPoints(){
-        // Import open3D
-//        PythonSupport.initialize()
-//        Open3DSupport.sitePackagesURL.insertPythonPath()
-//        NumPySupport.sitePackagesURL.insertPythonPath()
-//        let o3d = Python.import("open3d")
-        
+    func selectPoints() {
         // Alert Message
         let alert = UIAlertController(title: "Align Scan", message: "Please make sure exactly 3 points are selected!", preferredStyle: .alert)
-                        let ok = UIAlertAction(title: "OK", style: .default) {
-                            (UIAlertAction) -> Void in
-                            self.resetNoTouchTimer(true)
-                        }
-                        alert.addAction(ok)
+        let ok = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.resetNoTouchTimer(true)
+            self?.openPointSelectionWindow()
+        }
+        alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
-        
-        // Turns the current database into a mesh and displays it via a new window in open3D
-
     }
 
-    //MARK: Actions   
+    func openPointSelectionWindow() {
+        let fullScreenViewController = UIViewController()
+        fullScreenViewController.view.backgroundColor = .white
+
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.addTarget(self, action: #selector(closeFullScreenView), for: .touchUpInside)
+        fullScreenViewController.view.addSubview(doneButton)
+
+        // Center the "Done" button in the full-screen view
+        NSLayoutConstraint.activate([
+                doneButton.centerXAnchor.constraint(equalTo: fullScreenViewController.view.centerXAnchor),
+                doneButton.bottomAnchor.constraint(equalTo: fullScreenViewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            ])
+        
+        fullScreenViewController.modalPresentationStyle = .fullScreen
+        fullScreenViewController.modalTransitionStyle = .crossDissolve
+
+        self.present(fullScreenViewController, animated: true, completion: nil)
+    }
+
+    // Function to close the full-screen view
+    @objc func closeFullScreenView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    
+    //MARK: Actions
     @IBAction func selectPointsAction(_ sender: UIButton) {
         selectPoints()
     }

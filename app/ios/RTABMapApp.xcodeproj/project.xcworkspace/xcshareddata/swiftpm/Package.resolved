@@ -1,5 +1,5 @@
 {
-  "originHash" : "7bac7e222c65e7b6e05040e97d32c7b485a0e7ae14ab8da3444a0aafe3187cdf",
+  "originHash" : "60ac8b86109b4c3a64a69d8b1399b5c4517067af04d51b86b794838e10a10a6b",
   "pins" : [
     {
       "identity" : "blas-lapack-appstore-workaround",
@@ -31,10 +31,9 @@
     {
       "identity" : "open3d-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/charliegarrison/Open3D-iOS.git",
+      "location" : "https://github.com/kewlbear/Open3D-iOS/",
       "state" : {
-        "branch" : "main",
-        "revision" : "92d514dcbeb4b7955946cbf5f3c15a332727e15b"
+        "revision" : "b7155b2c4dbb80e7cb079ca05c659e7a17b1eb1e"
       }
     },
     {
@@ -49,7 +48,7 @@
     {
       "identity" : "pythonkit",
       "kind" : "remoteSourceControl",
-      "location" : "http://github.com/pvieito/PythonKit.git",
+      "location" : "https://github.com/pvieito/PythonKit.git",
       "state" : {
         "branch" : "master",
         "revision" : "43647b36cacb99558e57ef98e97ef598f91d1164"
