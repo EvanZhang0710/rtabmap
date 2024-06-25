@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -151,8 +151,9 @@
 		4EFD0F62259E341C00575D88 /* RTABMapApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EFD0F61259E341C00575D88 /* RTABMapApp.cpp */; };
 		4EFD0F67259E38DE00575D88 /* NativeWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EFD0F66259E38DE00575D88 /* NativeWrapper.cpp */; };
 		4EFD0F70259F847300575D88 /* background_renderer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4EFD0F6E259F847300575D88 /* background_renderer.cc */; };
-		B88B202D2C29BF720091626F /* Open3D-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = B88B202C2C29BF720091626F /* Open3D-iOS */; };
 		B88B20302C29C24D0091626F /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = B88B202F2C29C24D0091626F /* PythonKit */; };
+		B8940FD82C2B5CBA00B3E013 /* Open3D-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = B8940FD72C2B5CBA00B3E013 /* Open3D-iOS */; };
+		B8940FDB2C2B5D1400B3E013 /* Open3D-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = B8940FDA2C2B5D1400B3E013 /* Open3D-iOS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -371,8 +372,8 @@
 				4EFD0F2C259D5C2200575D88 /* libg2o_types_slam2d_addons.a in Frameworks */,
 				4EFD0F2D259D5C2200575D88 /* libg2o_types_slam3d_addons.a in Frameworks */,
 				4EFD0F2E259D5C2200575D88 /* libg2o_types_slam3d.a in Frameworks */,
-				B88B202D2C29BF720091626F /* Open3D-iOS in Frameworks */,
 				4EFD0F2F259D5C2200575D88 /* libmetis.a in Frameworks */,
+				B8940FD82C2B5CBA00B3E013 /* Open3D-iOS in Frameworks */,
 				4EFD0F30259D5C2200575D88 /* libg2o_types_sclam2d.a in Frameworks */,
 				4EFD0F31259D5C2200575D88 /* libg2o_types_sim3.a in Frameworks */,
 				4EFD0F32259D5C2200575D88 /* libgtsam.a in Frameworks */,
@@ -434,6 +435,7 @@
 				4EFD0B3F259D4DE900575D88 /* libboost_timer.a in Frameworks */,
 				4EFD0B40259D4DE900575D88 /* libboost_chrono.a in Frameworks */,
 				4EFD0B51259D4DF100575D88 /* libpcl_stereo.a in Frameworks */,
+				B8940FDB2C2B5D1400B3E013 /* Open3D-iOS in Frameworks */,
 				4EFD0B52259D4DF100575D88 /* libpcl_registration.a in Frameworks */,
 				4EFD0B53259D4DF100575D88 /* libpcl_features.a in Frameworks */,
 				4EFD0B54259D4DF100575D88 /* libpcl_filters.a in Frameworks */,
@@ -719,8 +721,9 @@
 			name = RTABMapApp;
 			packageProductDependencies = (
 				4E8B155326273A580037FC53 /* Zip */,
-				B88B202C2C29BF720091626F /* Open3D-iOS */,
 				B88B202F2C29C24D0091626F /* PythonKit */,
+				B8940FD72C2B5CBA00B3E013 /* Open3D-iOS */,
+				B8940FDA2C2B5D1400B3E013 /* Open3D-iOS */,
 			);
 			productName = RTABMapApp;
 			productReference = 4EE015C2259A2AF0008CCE65 /* RTABMapApp.app */;
@@ -751,8 +754,8 @@
 			mainGroup = 4EE015B9259A2AF0008CCE65;
 			packageReferences = (
 				4E8B155226273A580037FC53 /* XCRemoteSwiftPackageReference "Zip" */,
-				B88B202B2C29BF720091626F /* XCRemoteSwiftPackageReference "Open3D-iOS" */,
 				B88B202E2C29C24D0091626F /* XCRemoteSwiftPackageReference "PythonKit" */,
+				B8940FD92C2B5D1400B3E013 /* XCLocalSwiftPackageReference "../../../Open3D-iOS" */,
 			);
 			productRefGroup = 4EE015C3259A2AF0008CCE65 /* Products */;
 			projectDirPath = "";
@@ -1119,6 +1122,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		B8940FD92C2B5D1400B3E013 /* XCLocalSwiftPackageReference "../../../Open3D-iOS" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../Open3D-iOS";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		4E8B155226273A580037FC53 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1126,14 +1136,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.1.0;
-			};
-		};
-		B88B202B2C29BF720091626F /* XCRemoteSwiftPackageReference "Open3D-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kewlbear/Open3D-iOS/";
-			requirement = {
-				kind = revision;
-				revision = b7155b2c4dbb80e7cb079ca05c659e7a17b1eb1e;
 			};
 		};
 		B88B202E2C29C24D0091626F /* XCRemoteSwiftPackageReference "PythonKit" */ = {
@@ -1152,15 +1154,18 @@
 			package = 4E8B155226273A580037FC53 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
-		B88B202C2C29BF720091626F /* Open3D-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B88B202B2C29BF720091626F /* XCRemoteSwiftPackageReference "Open3D-iOS" */;
-			productName = "Open3D-iOS";
-		};
 		B88B202F2C29C24D0091626F /* PythonKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B88B202E2C29C24D0091626F /* XCRemoteSwiftPackageReference "PythonKit" */;
 			productName = PythonKit;
+		};
+		B8940FD72C2B5CBA00B3E013 /* Open3D-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "Open3D-iOS";
+		};
+		B8940FDA2C2B5D1400B3E013 /* Open3D-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "Open3D-iOS";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

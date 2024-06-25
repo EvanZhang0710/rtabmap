@@ -1,5 +1,5 @@
 {
-  "originHash" : "60ac8b86109b4c3a64a69d8b1399b5c4517067af04d51b86b794838e10a10a6b",
+  "originHash" : "f05e2bd0b04afd2be9c2f76133ccd551dbfdc1ca1ee5f42c2b4572f198dad486",
   "pins" : [
     {
       "identity" : "blas-lapack-appstore-workaround",
@@ -24,16 +24,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kewlbear/NumPy-iOS.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "4d0f25e59ca6b9746ae447d6bb682d12a54cff13"
-      }
-    },
-    {
-      "identity" : "open3d-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kewlbear/Open3D-iOS/",
-      "state" : {
-        "revision" : "b7155b2c4dbb80e7cb079ca05c659e7a17b1eb1e"
+        "revision" : "c27e79ea5485f5b727aaaf330635f7d423513100"
       }
     },
     {
@@ -41,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kewlbear/Python-iOS.git",
       "state" : {
-        "revision" : "4f3ca2bc0cff1ef2511555eb6114f9eb12e50412",
-        "version" : "0.1.1-b20230423-090254"
+        "branch" : "3.8_kivy-ios",
+        "revision" : "f5333228b625560a90c17d9e2d3a9b2aac6967a9"
       }
     },
     {

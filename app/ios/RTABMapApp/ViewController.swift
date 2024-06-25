@@ -188,7 +188,6 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         PythonSupport.initialize()
         Open3DSupport.sitePackagesURL.insertPythonPath()
         NumPySupport.sitePackagesURL.insertPythonPath()
-        let o3d = Python.import("open3d")
         let sys = Python.import("sys")
         print("Python \(sys.version_info.major).\(sys.version_info.minor)")
         print("Python Version: \(sys.version)")
@@ -2326,26 +2325,7 @@ class ViewController: GLKViewController, ARSessionDelegate, RTABMapObserver, UIP
         
         modelViewController.modalPresentationStyle = .fullScreen
         modelViewController.modalTransitionStyle = .crossDissolve
-
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let o3d = Python.import("open3d")
-//            let url = Bundle.main.url(forResource: "fragment", withExtension: "ply")!
-//            let pcd = o3d.io.read_point_cloud(url.path)
-//            let np = Python.import("numpy")
-//            let points = np.asarray(pcd.points)
-//            var vertices = [SCNVector3]()
-//            for point in points {
-//                vertices.append(SCNVector3(x: Float(point[0])!, y: Float(point[1])!, z: Float(point[2])!))
-//            }
-//            let geometrySource = SCNGeometrySource(vertices: vertices)
-//            let indices: [Int32] = Array(0..<Int32(vertices.count))
-//            let geometryElement = SCNGeometryElement(indices: indices, primitiveType: .point)
-//            let geometry = SCNGeometry(sources: [geometrySource], elements: [geometryElement])
-//            let node = SCNNode(geometry: geometry)
-//            DispatchQueue.main.async {
-//                    sceneView.scene?.rootNode.addChildNode(node)
-//            }
-//        }
+        let o3d = Python.import("open3d")
         self.present(modelViewController, animated: true, completion: nil)
     }
 
